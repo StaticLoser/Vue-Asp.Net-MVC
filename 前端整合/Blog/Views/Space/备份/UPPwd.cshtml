@@ -1,0 +1,61 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>UPPwd</title>
+    <script src="~/Content/js/jquery-3.1.1.min.js"></script>
+</head>
+<body>
+    <div class="UPPwd">
+        <p style="font-size: 18px;padding: 20px 25px;color: rgb(100, 100, 100);">修改密码</p>
+        <hr>
+            <div class="InfoBox">
+                <form action="/Space/DoUPPwd" method="post">
+                    <table class="UpTable">
+                        <tr>
+                            <td>旧密码</td>
+                            <td><input type="password" name="UsedPwd" class="UsedPwd"></td>
+                        </tr>
+                        <tr>
+                            <td>新密码</td>
+                            <td><input type="password" name="NewPwd" class="NewPwd"></td>
+                        </tr>
+                        <tr>
+                            <td>确认密码</td>
+                            <td><input type="password" name="ReNewPwd" class="ReNewPwd"></td>
+                        </tr>
+                    </table>
+                    <input type="submit" value="确认修改" id="InfoSave" class="InfoSave">
+                </form>
+            </div>
+    </div>
+    <script>
+        $("#InfoSave").click(function () {
+            var UsedPwd = $(".UsedPwd").val();
+            var NewPwd = $(".NewPwd").val();
+            var ReNewPwd = $(".ReNewPwd").val();
+            if (UsedPwd.length <= 0) {
+                alert('请输入旧密码!')
+                return;
+            }
+            if (NewPwd.length <= 0) {
+                alert('请输入新密码!')
+                return;
+            }
+            if (ReNewPwd.length <= 0) {
+                alert('请输入确认密码!')
+                return;
+            }
+            if (NewPwd != ReNewPwd) {
+                alert('新密码与确认密码不一致!')
+                return;
+            }
+            if (UsedPwd == NewPwd == ReNewPwd) {
+                alert('新密码与旧密码不能一致!')
+                return;
+            }
+        })
+    </script>
+</body>
+</html>

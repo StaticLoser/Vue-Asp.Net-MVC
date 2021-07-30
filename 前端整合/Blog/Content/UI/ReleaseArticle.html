@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>发表文章</title>
+    <link rel="stylesheet" href="../css/ReleaseArticle.css">
+    <script src="../wangEditor/dist/wangEditor.js"></script>
+    <script src="../js/jquery-3.1.1.min.js"></script>
+</head>
+<body>
+    <!-- 菜单 -->
+    <div class="nav">
+        <div class="navImg">
+            <a href="Index.html">
+                <img src="../Image/logo-210x70-m.png" alt="">
+            </a>
+        </div>
+        <div class="nav_info">
+            <ui>
+                <li><a href=""><i></i>写文章</a></li>
+                <li><a href=""><img src="../Image/users/caa9e919818ff47f24e3c644b0e13cd9.png" alt="" class="handImg"></a></li>
+                <li style="padding: 0px"><a href="">MyName</a></li>
+            </ui>
+        </div>
+    </div>
+    <!-- 发布区域 -->
+    <div class="ReleaseBox">
+        <div class="ReTitleBox">
+            <input type="text" name="" id="" class="ReTitle" placeholder="在此输入文章标题">
+        </div>
+        <div class="ReContent">
+            <div class="TypeBox">
+                <span class="TypeBoxlable">文章标签:</span>
+                <span class="ContentType"><input type="text" name="" id="" class="Types" value="" placeholder="在这里写填写标签"></span>
+            </div>
+            <!-- 文本编辑器 -->
+            <div id="ContentBox" style="margin-top: 20px;margin-bottom: 100px;">
+                
+            </div>
+            <input type="text" name="" id="txtContent" style="display: none;">
+            <input type="text" name="" id="txtTypes" style="display: none;">
+        </div>
+    </div>
+    <div class="UPBox">
+        <div class="UPInput">
+            <input type="submit" value="保存草稿" id="SavaCG">
+            <input type="submit" value="发布" id="UpArticle">
+        </div>
+    </div>
+    <!-- 引入 wangEditor.min.js -->
+    <script type="text/javascript">
+        const E = window.wangEditor
+        const editor = new E('#ContentBox')
+        // 或者 const editor = new E( document.getElementById('div1') )
+        // 设置编辑区域高度为 500px
+        editor.config.height = 600
+        // 配置 server 接口地址
+        editor.config.uploadImgServer = '/img'
+
+        editor.config.linkImgCallback = function (src,alt,href) {
+        console.log('图片 src ', src)
+        console.log('图片文字说明',alt)
+        console.log('跳转链接',href)
+    }
+        editor.config.onlineVideoCallback = function (video) {
+        // 自定义回调内容，内容成功插入后会执行该函数
+        console.log('插入视频内容', video)
+        }
+        editor.create()
+    </script>
+    <script>
+        // 存储标签
+        var Types="";
+        // 生成标签样式
+        $(".Types").keyup(function(event){
+            if(event.keyCode==13){
+                //判断是否为空值
+                var txt=$(this).val();
+                if(txt!=""){
+                    $(this).parent().prepend("<span>"+txt+"<i class='Del_ico'></i></span>");
+                    $(this).val("");
+                    Types+=txt+",";
+                    $("#txtTypes").val(Types)
+                }
+                else{
+                    alert("标签不能输入空值");
+                    return;
+                }
+            }
+        })
+        // 清除标签
+        $(".ContentType").on("click",".Del_ico",function(){
+            // 获取要删除的标签字符
+            var typeHtml=$(this).parent().html();
+            var typeIndex=typeHtml.indexOf('<i class="Del_ico"></i>');
+            var type=typeHtml.substring(0,typeIndex);
+            // 清除储存的标签
+            Types = Types.replace(type+",",'')
+            // console.log(Types);
+            // 清除样式
+            $(this).parent().remove();
+        })
+        $("#UpArticle").click(function(){
+            // $("#txtContent").val(editor.txt.html())
+            $("#txtTypes").val(Types);
+            console.log($("#txtTypes").val());
+        })
+    </script>
+    
+</body>
+</html>

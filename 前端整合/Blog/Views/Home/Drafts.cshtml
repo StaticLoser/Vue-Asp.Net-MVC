@@ -1,0 +1,83 @@
+﻿@model List<Blog.Models.articles>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>草稿箱</title>
+    <link rel="stylesheet" href="/Content/css/index.css">
+    <link rel="stylesheet" href="/Content/css/bootstrap.min.css">
+    <script src="/Content/js/jquery-3.1.1.min.js"></script>
+    <style>
+        * {
+            margin: 0 auto;
+            padding: 0;
+        }
+
+        #Drafts-box {
+            height: 100px;
+            width: 700px;
+            padding-top: 30px;
+            box-shadow: 2px 2px 2px 0px #808080;
+            border-radius: 4px
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <input type="hidden" name="uid" value="" />
+        <!-- 菜单 -->
+        <div class="nav">
+            <div class="navImg">
+                <img src="/Content/Image/logo-210x70-m.png" alt="">
+            </div>
+            <div class="nav_info">
+                <ui>
+                    @if (Session["userInfo"] == null)
+                    {
+                        <li><a href="/Login/Login"><i></i>写文章</a></li>
+                        <li><a href="/Login/Login">登录</a></li>
+                        <li><a href="/Login/Register">注册</a></li>
+                    }
+                    else
+                    {
+                        <li><a href="/ReleaseArticle/Index"><i></i>写文章</a></li>
+                        <li><a href="/Space/Index"><img src="@ViewBag.img" alt="" class="handImg"></a></li>
+                        <li style="padding: 0px" class="MyName">
+                            <a href="/Space/Index">@ViewBag.name</a>
+                            <div class="UserMove">
+                                <ul>
+                                    <li><a href="/Space/UserSet">个人设置</a></li>
+                                    <li><a href="/Home/LogOut">退出账号</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                    }
+                </ui>
+            </div>
+            <div class="clear"></div>
+        </div>
+        @*内容区*@
+        <content>
+            <div style="height:900px;box-shadow:0 1px 5px;width:900px;margin-top:30px">
+                @foreach (var item in Model)
+                {
+                    <div id="Drafts-box">
+                        <h2>@item.title</h2>
+                        <p>最后修改时间：@item.updated_at</p>
+                        <a href="#">编辑</a>
+                        <button id="btnDelete" onclick="Dodel(@item.aid)">删除</button>
+                    </div>
+                }
+            </div>
+        </content>
+    </div>
+    <script>
+    </script>
+</body>
+</html>
+

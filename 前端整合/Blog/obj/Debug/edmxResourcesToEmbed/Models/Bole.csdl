@@ -1,0 +1,319 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="bokeModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="admins">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Type" Type="Int32" Nullable="false" />
+    <Property Name="Created_at" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="articles">
+    <Key>
+      <PropertyRef Name="aid" />
+    </Key>
+    <Property Name="aid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="uid" Type="Int32" Nullable="false" />
+    <Property Name="text" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="content" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="lable" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="is_del" Type="Int32" Nullable="false" />
+    <Property Name="pv" Type="Int32" />
+    <Property Name="state" Type="Int32" Nullable="false" />
+    <Property Name="created_at" Type="DateTime" Nullable="false" Precision="7" />
+    <Property Name="updated_at" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="users" Relationship="Self.FK_articles_users" FromRole="articles" ToRole="users" />
+    <NavigationProperty Name="Collect" Relationship="Self.FK_Collect_articles" FromRole="articles" ToRole="Collect" />
+    <NavigationProperty Name="comments" Relationship="Self.FK_comments_articles" FromRole="articles" ToRole="comments" />
+    <NavigationProperty Name="informs" Relationship="Self.FK_informs_articles" FromRole="articles" ToRole="informs" />
+    <NavigationProperty Name="Like" Relationship="Self.FK_Like_articles" FromRole="articles" ToRole="Like" />
+    <NavigationProperty Name="recommends" Relationship="Self.FK_recommends_articles" FromRole="articles" ToRole="recommends" />
+  </EntityType>
+  <EntityType Name="Collect">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="aid" Type="Int32" Nullable="false" />
+    <Property Name="uid" Type="Int32" Nullable="false" />
+    <Property Name="createTime" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="articles" Relationship="Self.FK_Collect_articles" FromRole="Collect" ToRole="articles" />
+  </EntityType>
+  <EntityType Name="comments">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="aid" Type="Int32" Nullable="false" />
+    <Property Name="uid" Type="Int32" Nullable="false" />
+    <Property Name="content" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="praies" Type="Int32" Nullable="false" />
+    <Property Name="created_at" Type="DateTime" Precision="3" />
+    <Property Name="update_at" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="articles" Relationship="Self.FK_comments_articles" FromRole="comments" ToRole="articles" />
+    <NavigationProperty Name="users" Relationship="Self.FK_comments_users" FromRole="comments" ToRole="users" />
+  </EntityType>
+  <EntityType Name="drafts">
+    <Key>
+      <PropertyRef Name="did" />
+    </Key>
+    <Property Name="did" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="uid" Type="Int32" Nullable="false" />
+    <Property Name="tittle" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="content" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="labId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="create_at" Type="DateTime" Precision="3" />
+    <Property Name="update_at" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="users" Relationship="Self.FK_drafts_users" FromRole="drafts" ToRole="users" />
+  </EntityType>
+  <EntityType Name="informs">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="aid" Type="Int32" Nullable="false" />
+    <Property Name="uid" Type="Int32" Nullable="false" />
+    <Property Name="type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="content" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="create_at" Type="DateTime" Precision="3" />
+    <Property Name="update_at" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="articles" Relationship="Self.FK_informs_articles" FromRole="informs" ToRole="articles" />
+    <NavigationProperty Name="users" Relationship="Self.FK_informs_users" FromRole="informs" ToRole="users" />
+  </EntityType>
+  <EntityType Name="Like">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="aid" Type="Int32" Nullable="false" />
+    <Property Name="uid" Type="Int32" Nullable="false" />
+    <Property Name="created_at" Type="DateTime" Precision="3" />
+    <Property Name="update_at" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="articles" Relationship="Self.FK_Like_articles" FromRole="Like" ToRole="articles" />
+    <NavigationProperty Name="users" Relationship="Self.FK_Like_users" FromRole="Like" ToRole="users" />
+  </EntityType>
+  <EntityType Name="recommends">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="aid" Type="Int32" Nullable="false" />
+    <Property Name="uid" Type="Int32" Nullable="false" />
+    <Property Name="create_at" Type="DateTime" Precision="3" />
+    <Property Name="update_at" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="articles" Relationship="Self.FK_recommends_articles" FromRole="recommends" ToRole="articles" />
+    <NavigationProperty Name="users" Relationship="Self.FK_recommends_users" FromRole="recommends" ToRole="users" />
+  </EntityType>
+  <EntityType Name="users">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="LoginID" Type="String" MaxLength="18" FixedLength="false" Unicode="false" />
+    <Property Name="password" Type="String" MaxLength="300" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="img" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="sign" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="cover" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="created_at" Type="DateTime" Precision="3" />
+    <Property Name="update_at" Type="DateTime" Precision="3" />
+    <Property Name="state" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="articles" Relationship="Self.FK_articles_users" FromRole="users" ToRole="articles" />
+    <NavigationProperty Name="comments" Relationship="Self.FK_comments_users" FromRole="users" ToRole="comments" />
+    <NavigationProperty Name="drafts" Relationship="Self.FK_drafts_users" FromRole="users" ToRole="drafts" />
+    <NavigationProperty Name="informs" Relationship="Self.FK_informs_users" FromRole="users" ToRole="informs" />
+    <NavigationProperty Name="Like" Relationship="Self.FK_Like_users" FromRole="users" ToRole="Like" />
+    <NavigationProperty Name="recommends" Relationship="Self.FK_recommends_users" FromRole="users" ToRole="recommends" />
+  </EntityType>
+  <Association Name="FK_articles_users">
+    <End Role="users" Type="Self.users" Multiplicity="1" />
+    <End Role="articles" Type="Self.articles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="articles">
+        <PropertyRef Name="uid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Collect_articles">
+    <End Role="articles" Type="Self.articles" Multiplicity="1" />
+    <End Role="Collect" Type="Self.Collect" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="articles">
+        <PropertyRef Name="aid" />
+      </Principal>
+      <Dependent Role="Collect">
+        <PropertyRef Name="aid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_comments_articles">
+    <End Role="articles" Type="Self.articles" Multiplicity="1" />
+    <End Role="comments" Type="Self.comments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="articles">
+        <PropertyRef Name="aid" />
+      </Principal>
+      <Dependent Role="comments">
+        <PropertyRef Name="aid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_informs_articles">
+    <End Role="articles" Type="Self.articles" Multiplicity="1" />
+    <End Role="informs" Type="Self.informs" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="articles">
+        <PropertyRef Name="aid" />
+      </Principal>
+      <Dependent Role="informs">
+        <PropertyRef Name="aid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Like_articles">
+    <End Role="articles" Type="Self.articles" Multiplicity="1" />
+    <End Role="Like" Type="Self.Like" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="articles">
+        <PropertyRef Name="aid" />
+      </Principal>
+      <Dependent Role="Like">
+        <PropertyRef Name="aid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_recommends_articles">
+    <End Role="articles" Type="Self.articles" Multiplicity="1" />
+    <End Role="recommends" Type="Self.recommends" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="articles">
+        <PropertyRef Name="aid" />
+      </Principal>
+      <Dependent Role="recommends">
+        <PropertyRef Name="aid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_comments_users">
+    <End Role="users" Type="Self.users" Multiplicity="1" />
+    <End Role="comments" Type="Self.comments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="comments">
+        <PropertyRef Name="uid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_drafts_users">
+    <End Role="users" Type="Self.users" Multiplicity="1" />
+    <End Role="drafts" Type="Self.drafts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="drafts">
+        <PropertyRef Name="uid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_informs_users">
+    <End Role="users" Type="Self.users" Multiplicity="1" />
+    <End Role="informs" Type="Self.informs" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="informs">
+        <PropertyRef Name="uid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Like_users">
+    <End Role="users" Type="Self.users" Multiplicity="1" />
+    <End Role="Like" Type="Self.Like" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Like">
+        <PropertyRef Name="uid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_recommends_users">
+    <End Role="users" Type="Self.users" Multiplicity="1" />
+    <End Role="recommends" Type="Self.recommends" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="recommends">
+        <PropertyRef Name="uid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="bokeEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="admins" EntityType="Self.admins" />
+    <EntitySet Name="articles" EntityType="Self.articles" />
+    <EntitySet Name="Collect" EntityType="Self.Collect" />
+    <EntitySet Name="comments" EntityType="Self.comments" />
+    <EntitySet Name="drafts" EntityType="Self.drafts" />
+    <EntitySet Name="informs" EntityType="Self.informs" />
+    <EntitySet Name="Like" EntityType="Self.Like" />
+    <EntitySet Name="recommends" EntityType="Self.recommends" />
+    <EntitySet Name="users" EntityType="Self.users" />
+    <AssociationSet Name="FK_articles_users" Association="Self.FK_articles_users">
+      <End Role="users" EntitySet="users" />
+      <End Role="articles" EntitySet="articles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Collect_articles" Association="Self.FK_Collect_articles">
+      <End Role="articles" EntitySet="articles" />
+      <End Role="Collect" EntitySet="Collect" />
+    </AssociationSet>
+    <AssociationSet Name="FK_comments_articles" Association="Self.FK_comments_articles">
+      <End Role="articles" EntitySet="articles" />
+      <End Role="comments" EntitySet="comments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_informs_articles" Association="Self.FK_informs_articles">
+      <End Role="articles" EntitySet="articles" />
+      <End Role="informs" EntitySet="informs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Like_articles" Association="Self.FK_Like_articles">
+      <End Role="articles" EntitySet="articles" />
+      <End Role="Like" EntitySet="Like" />
+    </AssociationSet>
+    <AssociationSet Name="FK_recommends_articles" Association="Self.FK_recommends_articles">
+      <End Role="articles" EntitySet="articles" />
+      <End Role="recommends" EntitySet="recommends" />
+    </AssociationSet>
+    <AssociationSet Name="FK_comments_users" Association="Self.FK_comments_users">
+      <End Role="users" EntitySet="users" />
+      <End Role="comments" EntitySet="comments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_drafts_users" Association="Self.FK_drafts_users">
+      <End Role="users" EntitySet="users" />
+      <End Role="drafts" EntitySet="drafts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_informs_users" Association="Self.FK_informs_users">
+      <End Role="users" EntitySet="users" />
+      <End Role="informs" EntitySet="informs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Like_users" Association="Self.FK_Like_users">
+      <End Role="users" EntitySet="users" />
+      <End Role="Like" EntitySet="Like" />
+    </AssociationSet>
+    <AssociationSet Name="FK_recommends_users" Association="Self.FK_recommends_users">
+      <End Role="users" EntitySet="users" />
+      <End Role="recommends" EntitySet="recommends" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

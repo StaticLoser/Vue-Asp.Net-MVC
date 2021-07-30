@@ -1,0 +1,162 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+a{
+    text-decoration: none;
+}
+ul li{
+    list-style: none;
+}
+.nav{
+    /* 清除盒子塌陷 */
+    /* overflow: hidden; */
+}
+.clear{
+    clear: both;
+}
+.navImg{
+    float: left;
+}
+.navImg img{
+    margin-left: 150px;
+}
+.nav_info{
+    float: right;
+    line-height: 74px;
+    margin-right: 100px;
+}
+.nav_info i{
+    display: block;
+    height: 15px;
+    width: 15px;
+    background: url(../Image/Write.png);
+    background-size: 100%;
+    float: left;
+    margin-top: 28px;
+    margin-right: 2px;
+}
+.nav_info li{
+    list-style: none;
+    /* display: inline-block; */
+    float: left;
+    padding: 0 10px;
+}
+.nav_info a{
+    color: #777777;
+    font-size: 14px;
+}
+.handImg{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    vertical-align: middle;
+}
+.MyName{
+    position: relative;
+}
+.UserMove{
+    width: 100px;
+    position: absolute;
+    bottom: -75px;
+    left: -10px;
+    z-index: 20;
+    display: none;
+}
+.UserMove a{
+    display: block;
+    height: 50px;
+    width: 100px;
+    line-height: 50px;
+    text-align: center;
+    background: rgb(252, 252, 252);
+}
+.UserMove a:hover{
+    background: rgb(247, 247, 247);
+}
+/* 文章区域 */
+.ReleaseBox{
+    width: 85%;
+    margin: 0 auto;
+}
+.ReTitleBox{
+    margin-top: 30px;
+    text-align: center;
+}
+.ReTitle{
+    border: none;
+    border-bottom: 1px solid #ccc;
+    outline: none;
+    width: 60%;
+    font-size: 21px;
+    padding: 5px 0;
+    text-align: center;
+}
+.TypeBox{
+    margin-top: 20px;
+    width: auto;
+    height: auto;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    line-height: 40px;
+    overflow: hidden;
+}
+.TypeBoxlable{
+    line-height: 40px;
+    font-size: 14px;
+    margin: 0 10px;
+    color: rgb(129, 129, 129);
+    float: left;
+}
+.Types{
+    width: auto;
+    height: auto;
+    border: none;
+    outline: none;
+}
+.ContentType span{
+    display: inline-block;
+    padding: 0 5px;
+    height: 20px;
+    line-height: 20px;
+    background: #ebf0e1;
+    font-size: 12px;
+    text-align: center;
+    color: #29a4a9;
+    margin: 0 5px;
+}
+.ContentType span>i{
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background: url(../Image/Del.png);
+    background-size: 100%;
+    background-repeat: no-repeat;
+    margin-left: 3px;
+    cursor: pointer;
+}
+.UPInput{
+    height: 80px;
+    width: 100%;
+    background: #f8f8f8;
+    text-align: center;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    z-index: 200000;
+}
+#SavaCG,#UpArticle{
+    width: 120px;
+    height: 45px;
+    border-radius: 4px;
+    outline: none;
+    border: none;
+    margin-top: 20px;
+}
+#SavaCG{
+    background: rgb(235, 235, 235);
+}
+#UpArticle{
+    background: rgb(0, 187, 0);
+    color: #fff;
+}
